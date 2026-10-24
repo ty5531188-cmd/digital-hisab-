@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Small Business Hisab</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5f8;--card:#fff;--ink:#101828;--mut:#667085;--line:#e4e7ec;--p:#14213d;--pk:#fff;--hero:#14213d;--g:#1f7a5a;--gs:#e8f3ee;--r:#b4443a;--rs:#fbeceb;--y:#c9a24b;--ys:#f6efdc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a101c;--card:#111a2b;--ink:#e9edf5;--mut:#93a0b8;--line:#1f2a40;--p:#e2b85c;--pk:#1a1405;--hero:#16233d;--g:#4cc296;--gs:#12261f;--r:#f0847a;--rs:#2e1a19;--y:#e2b85c;--ys:#2a2312;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a101c;--card:#111a2b;--ink:#e9edf5;--mut:#93a0b8;--line:#1f2a40;--p:#e2b85c;--pk:#1a1405;--hero:#16233d;--g:#4cc296;--gs:#12261f;--r:#f0847a;--rs:#2e1a19;--y:#e2b85c;--ys:#2a2312;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:15px/1.5 "Hind","Noto Sans Devanagari","Segoe UI",system-ui,sans-serif;padding-bottom:72px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--y);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line)}
+.logo{width:30px;height:30px;border-radius:8px;background:var(--p);color:var(--pk);display:grid;place-items:center;font-weight:700;font-size:15px}
+.top h1{font-size:16px;margin:0;flex:1;font-weight:600;letter-spacing:.2px}
+.top #lang{margin-left:auto}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:5px 11px;cursor:pointer;min-height:34px;font-size:14px}
+.chip:hover{border-color:var(--y)}
+main{max-width:980px;margin:0 auto;padding:18px 16px}
+.big{background:var(--hero);color:#fff;border-radius:12px;padding:18px 20px;border:1px solid rgba(201,162,75,.4)}
+.big small{display:block;color:#d9b966;font-size:13px;font-weight:500}
+.big b{display:block;font-size:32px;line-height:1.25;font-variant-numeric:tabular-nums;font-weight:600;letter-spacing:.3px;margin-top:2px}
+.big p{margin:4px 0 0;font-size:13px;color:rgba(255,255,255,.75)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card small{color:var(--mut);display:block;font-size:13px}
+.card b{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums}
+.bad{color:var(--r)}.ok{color:var(--g)}
+h2{font-size:15px;font-weight:600;margin:24px 0 10px;color:var(--ink)}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--p);border-radius:8px;padding:9px 15px;background:var(--p);color:var(--pk);font-weight:600;font-size:14px;cursor:pointer;min-height:44px}
+.btn:hover{filter:brightness(1.12)}
+.btn.o{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.o:hover{border-color:var(--y);filter:none}
+.btn.r{background:var(--r);border-color:var(--r);color:#fff}
+.rows{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;background:var(--card);border:0;border-top:1px solid var(--line);cursor:pointer;width:100%;text-align:left}
+.rows>.row:first-child{border-top:0}
+button.row:hover{background:var(--bg)}
+.row .n{font-weight:600}.row .s{color:var(--mut);font-size:13px}
+.amt{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.tag{font-size:12px;border-radius:4px;padding:1px 6px;background:var(--rs);color:var(--r)}
+input,select,textarea{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);min-height:44px}
+input:focus,select:focus,textarea:focus{border-color:var(--y);outline:0;box-shadow:0 0 0 3px var(--ys)}
+label{display:block;margin:12px 0 4px;font-weight:600;font-size:13px;color:var(--mut)}
+.empty{padding:22px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:10px;background:var(--card)}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:6}
+nav button{flex:1;border:0;background:none;padding:14px 2px;font-size:13px;cursor:pointer;font-weight:500;color:var(--mut)}
+nav button[aria-current="page"]{color:var(--ink);font-weight:600;box-shadow:inset 0 2px 0 var(--y)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);width:min(440px,calc(100% - 24px));padding:18px}
+dialog::backdrop{background:rgba(10,16,28,.6)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--mut);font-weight:500;font-size:13px}
+.msg{position:fixed;left:12px;right:12px;bottom:84px;margin:auto;max-width:420px;padding:12px 14px;border-radius:10px;background:var(--p);color:var(--pk);z-index:20;font-weight:500}
+.note{font-size:13px;color:var(--mut);margin-top:20px}
+@media(min-width:900px){
+body{padding-left:232px;padding-bottom:24px}
+.top h1{display:none}
+nav{top:0;bottom:auto;right:auto;width:232px;height:100%;flex-direction:column;border-top:0;border-right:1px solid var(--line);padding:0 12px 12px;gap:2px;z-index:11}
+nav::before{content:"AI Small Business Hisab";display:block;font-weight:700;font-size:15px;padding:20px 12px 18px;margin-bottom:6px;border-bottom:1px solid var(--line);color:var(--ink)}
+nav button{flex:0 0 auto;text-align:left;padding:11px 12px;border-radius:8px;font-size:14px}
+nav button:hover{background:var(--bg)}
+nav button[aria-current="page"]{box-shadow:inset 3px 0 0 var(--y);background:var(--ys)}
+.msg{bottom:24px}
+}
+</style>
+</head>
+<body>
+<header class="top"><span class="logo" aria-hidden="true">हि</span><h1 id="ttl"></h1><button class="chip" id="lang" aria-label="Language"></button><button class="chip" id="thm" aria-label="Theme">◐</button></header>
+<main id="app"></main>
+<nav id="nav"></nav>
+<dialog id="dlg"></dialog>
+<script>
+const KEY="hisab_proto_v1";
+const T={hi:{sup:"सप्लायर",money:"बिक्री/खर्चा",rep:"रिपोर्ट",voice:"आवाज़",dena:"मुझे कितना देना है",addS:"+ सप्लायर जोड़ें",buy:"खरीद (उधार)",paidS:"भुगतान किया",addSale:"+ बिक्री",addExp:"+ खर्चा",method:"भुगतान का तरीका",cash:"नकद",upi:"UPI",bank:"बैंक",creditM:"उधार",cat:"श्रेणी",desc:"विवरण",gross:"कुल बिक्री (छूट से पहले)",disc:"छूट",netS:"शुद्ध बिक्री",expT:"कुल खर्चा",profit:"अनुमानित मुनाफ़ा",month:"महीना",profNote:"खरीद की लागत (COGS) दर्ज नहीं है, इसलिए यह मुनाफ़ा अधूरा और अनुमानित है। फ़ॉर्मूला: शुद्ध बिक्री − खर्चा। उधार बिक्री नकद वसूली नहीं है।",speak:"🎤 बोलें",parse:"समझें",vhint:"बोलें या लिखें, जैसे: Ramesh se 2500 lene hain, Shyam ko 1200 dene hain, aaj 5000 ki sale hui",vconf:"जाँच लें, फिर सेव करें। सेव से पहले कुछ दर्ज नहीं होता।",vfail:"समझ नहीं आया। रकम और नाम साफ़ लिखें।",vnone:"इस ब्राउज़र में आवाज़ पहचान उपलब्ध नहीं। नीचे टाइप करें।",noParty:"यह नाम नहीं मिला। सूची से सही नाम चुनें, या पहले जोड़ें।",app:"मेरा हिसाब",dash:"डैशबोर्ड",cust:"ग्राहक",lena:"मुझे कितना लेना है",today:"आज की वसूली",credit:"कुल उधार बिक्री",over:"देरी वाला बकाया",top:"सबसे ज़्यादा बकाया",recent:"हाल का लेन-देन",addC:"+ ग्राहक जोड़ें",udhar:"+ उधार बिक्री",pay:"+ पैसा मिला",csv:"CSV डाउनलोड",name:"नाम",phone:"फ़ोन (वैकल्पिक)",open:"शुरुआती बकाया (₹)",notes:"नोट",amt:"रकम (₹)",date:"तारीख",due:"भुगतान की अंतिम तारीख",save:"सेव करें",cancel:"रद्द करें",search:"ग्राहक खोजें",emptyC:"अभी कोई ग्राहक नहीं है। पहला ग्राहक जोड़ें।",emptyT:"अभी कोई लेन-देन नहीं है।",bal:"बकाया",back:"← वापस",ledger:"खाता (लेजर)",rev:"उलटें",dupP:"आज इसी रकम का भुगतान पहले से दर्ज है। फिर भी सेव करें?",revQ:"यह एंट्री उलटें? पुरानी एंट्री मिटेगी नहीं, एक सुधार एंट्री बनेगी।",needName:"नाम ज़रूरी है।",needAmt:"सही रकम डालें (0 से ज़्यादा)।",saved:"सेव हो गया।",fail:"सेव नहीं हो पाया। ब्राउज़र स्टोरेज बंद हो सकता है।",payTo:"भुगतान मिला",sale:"उधार बिक्री",revd:"सुधार (उलटी एंट्री)",paid:"मिला",note2:"यह प्रोटोटाइप है: डेटा सिर्फ़ इसी ब्राउज़र में रखा है। असली लॉगिन और डेटाबेस अगले चरण में जुड़ेंगे।",edit:"बदलें",sel:"ग्राहक चुनें",dup:"मिलता-जुलता नाम पहले से है। क्या यह वही ग्राहक है? ठीक है = फिर भी नया जोड़ें।"},
+en:{sup:"Suppliers",money:"Sales/Expenses",rep:"Reports",voice:"Voice",dena:"Total to pay",addS:"+ Add supplier",buy:"Purchase (credit)",paidS:"Paid",addSale:"+ Sale",addExp:"+ Expense",method:"Payment method",cash:"Cash",upi:"UPI",bank:"Bank",creditM:"Credit",cat:"Category",desc:"Description",gross:"Gross sales (before discount)",disc:"Discounts",netS:"Net sales",expT:"Total expenses",profit:"Estimated profit",month:"Month",profNote:"Cost of goods (COGS) is not recorded, so this profit is incomplete and estimated. Formula: net sales − expenses. Credit sales are not cash collected.",speak:"🎤 Speak",parse:"Understand",vhint:"Speak or type, e.g. Ramesh se 2500 lene hain, Shyam ko 1200 dene hain, aaj 5000 ki sale hui",vconf:"Check it, then save. Nothing is recorded before you save.",vfail:"Could not understand. Write the amount and name clearly.",vnone:"Speech recognition is not available in this browser. Type below.",noParty:"Name not found. Pick the right name from the list, or add it first.",app:"My Hisab",dash:"Dashboard",cust:"Customers",lena:"Total to receive",today:"Collected today",credit:"Total credit sales",over:"Overdue amount",top:"Highest dues",recent:"Recent transactions",addC:"+ Add customer",udhar:"+ Credit sale",pay:"+ Payment received",csv:"Download CSV",name:"Name",phone:"Phone (optional)",open:"Opening balance (₹)",notes:"Notes",amt:"Amount (₹)",date:"Date",due:"Due date",save:"Save",cancel:"Cancel",search:"Search customers",emptyC:"No customers yet. Add your first customer.",emptyT:"No transactions yet.",bal:"Due",back:"← Back",ledger:"Ledger",rev:"Reverse",dupP:"A payment of this amount is already recorded today. Save anyway?",revQ:"Reverse this entry? The original stays; a correcting entry is added.",needName:"Name is required.",needAmt:"Enter a valid amount above 0.",saved:"Saved.",fail:"Could not save. Browser storage may be blocked.",payTo:"Payment received",sale:"Credit sale",revd:"Correction (reversal)",paid:"Received",note2:"This is a prototype: data stays in this browser only. Real login and database come in the next step.",edit:"Edit",sel:"Choose customer",dup:"A similar name already exists. Is it the same customer? OK = add as new anyway."}};
+let lang="hi",view="dash",cur=null,q="",S={c:[],t:[]};
+try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r);lang=localStorage.getItem(KEY+"l")||"hi"}catch(e){}
+S.sa=S.sa||[];S.ex=S.ex||[];S.c.forEach(c=>c.kind=c.kind||"cust");
+const t=k=>T[lang][k];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const inr=p=>"₹"+(p/100).toLocaleString("en-IN",{minimumFractionDigits:p%100?2:0,maximumFractionDigits:2});
+const toP=v=>{const n=Math.round(parseFloat(v)*100);return isFinite(n)?n:NaN};
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const uid=()=>"T"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const sign={credit:1,adj_up:1,payment:-1,adj_down:-1};
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));return true}catch(e){return false}}
+function toast(m){const d=document.createElement("div");d.className="msg";d.setAttribute("role","status");d.textContent=m;document.body.append(d);setTimeout(()=>d.remove(),2600)}
+const bal=c=>c.open+S.t.filter(x=>x.cid===c.id).reduce((a,x)=>a+sign[x.type]*x.amt,0);
+function overdue(c){const b=bal(c);if(b<=0)return 0;const d=S.t.filter(x=>x.cid===c.id&&x.type==="credit"&&x.due&&x.due<today()&&!x.rev&&!S.t.some(y=>y.rev===x.id)).reduce((a,x)=>a+x.amt,0);return Math.min(b,d)}
+function save(){if(!persist()){toast(t("fail"));return false}toast(t("saved"));return true}
+function render(){
+  document.documentElement.lang=lang==="hi"?"hi":"en";
+  ttl.textContent=t("app");langB.textContent=lang==="hi"?"English":"हिंदी";
+  nav.innerHTML=[["dash","dash"],["cust","cust"],["sup","sup"],["money","money"],["rep","rep"],["voice","voice"]].map(([v,k])=>`<button data-v="${v}" ${view===v?'aria-current="page"':""}>${t(k)}</button>`).join("");
+  app.innerHTML=view==="dash"?dash():view==="cust"?custList("cust"):view==="sup"?custList("sup"):view==="money"?money():view==="rep"?rep():view==="voice"?voicePg():custView();
+}
+const ttl=document.getElementById("ttl"),langB=document.getElementById("lang"),app=document.getElementById("app"),nav=document.getElementById("nav"),dlg=document.getElementById("dlg");
+function dash(){
+  const CU=S.c.filter(c=>c.kind!=="sup"),tot=CU.reduce((a,c)=>a+Math.max(bal(c),0),0),td=today(),dena=S.c.filter(c=>c.kind==="sup").reduce((a,c)=>a+Math.max(bal(c),0),0);
+  const col=S.t.filter(x=>x.type==="payment"&&x.date===td&&isC(x.cid)).reduce((a,x)=>a+x.amt,0)+S.sa.filter(x=>x.date===td&&x.method!=="credit").reduce((a,x)=>a+x.amt,0);
+  const cr=S.t.filter(x=>x.type==="credit"&&isC(x.cid)).reduce((a,x)=>a+x.amt,0);
+  const ov=CU.reduce((a,c)=>a+overdue(c),0);
+  const topc=[...CU].map(c=>[c,bal(c)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const rec=[...S.t].sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id)).slice(0,5);
+  return `<div class="big"><small>${t("lena")}</small><b>${inr(tot)}</b><p>${S.c.length} ${t("cust")}</p></div>
+  <div class="grid"><div class="card"><small>${t("today")}</small><b class="ok">${inr(col)}</b></div><div class="card"><small>${t("over")}</small><b class="${ov?"bad":""}">${inr(ov)}</b></div><div class="card"><small>${t("credit")}</small><b>${inr(cr)}</b></div><div class="card"><small>${t("dena")}</small><b>${inr(dena)}</b></div></div>
+  <div class="acts"><button class="btn" data-a="udhar">${t("udhar")}</button><button class="btn" data-a="pay">${t("pay")}</button><button class="btn o" data-a="addC">${t("addC")}</button><button class="btn o" data-a="csv">${t("csv")}</button></div>
+  <h2>${t("top")}</h2>${topc.length?`<div class="rows">${topc.map(([c,b])=>`<button class="row" data-c="${c.id}"><span class="n">${esc(c.name)}</span><span class="amt bad">${inr(b)}</span></button>`).join("")}</div>`:`<div class="empty">${t("emptyT")}</div>`}
+  <h2>${t("recent")}</h2>${rec.length?`<div class="rows">${rec.map(x=>{const c=S.c.find(c=>c.id===x.cid);return `<div class="row" style="cursor:default"><span><span class="n">${esc(c?.name)}</span><br><span class="s">${esc(x.date)} · ${tl(x)}</span></span><span class="amt ${x.type==="payment"?"ok":""}">${x.type==="payment"?"−":"+"}${inr(x.amt)}</span></div>`}).join("")}</div>`:`<div class="empty">${t("emptyT")}</div>`}
+  <p class="note">${t("note2")}</p>`;
+}
+function custList(kind="cust"){
+  const l=S.c.filter(c=>c.kind===kind&&(c.name+(c.phone||"")).toLowerCase().includes(q.toLowerCase()));
+  return `<div class="acts" style="margin-bottom:10px"><button class="btn" data-a="${kind==="sup"?"addS":"addC"}">${t(kind==="sup"?"addS":"addC")}</button></div><input id="q" type="search" placeholder="${t("search")}" aria-label="${t("search")}" value="${esc(q)}">
+  <div style="margin-top:12px">${l.length?`<div class="rows">${l.map(c=>{const b=bal(c),o=overdue(c);return `<button class="row" data-c="${c.id}"><span><span class="n">${esc(c.name)}</span> ${o?`<span class="tag">${inr(o)}</span>`:""}<br><span class="s">${esc(c.phone||"")}</span></span><span class="amt ${b>0?"bad":""}">${inr(b)}</span></button>`}).join("")}</div>`:`<div class="empty">${t("emptyC")}</div>`}</div>`;
+}
+function custView(){
+  const c=S.c.find(x=>x.id===cur);if(!c){view="cust";return custList()}
+  const rows=S.t.filter(x=>x.cid===c.id).sort((a,b)=>a.date.localeCompare(b.date)||a.id.localeCompare(b.id));
+  let run=c.open;
+  const body=rows.map(x=>{run+=sign[x.type]*x.amt;const canRev=!x.rev&&!S.t.some(y=>y.rev===x.id);return `<tr><td>${esc(x.date)}</td><td>${tl(x)}${x.note?`<br><small>${esc(x.note)}</small>`:""}</td><td class="amt">${x.type==="payment"||x.type==="adj_down"?"−":"+"}${inr(x.amt)}</td><td class="amt">${inr(run)}</td><td>${canRev?`<button class="chip" data-rev="${x.id}">${t("rev")}</button>`:""}</td></tr>`}).join("");
+  return `<button class="chip" data-v="${c.kind==="sup"?"sup":"cust"}">${t("back")}</button><h2 style="margin-top:14px">${esc(c.name)}</h2><p class="s" style="color:var(--mut);margin:0">${esc(c.phone||"")} ${esc(c.notes||"")}</p>
+  <div class="grid"><div class="card"><small>${t("bal")}</small><b class="${bal(c)>0?"bad":"ok"}">${inr(bal(c))}</b></div><div class="card"><small>${t("over")}</small><b>${inr(overdue(c))}</b></div></div>
+  <div class="acts"><button class="btn" data-a="udhar" data-cc="${c.id}">${c.kind==="sup"?"+ "+t("buy"):t("udhar")}</button><button class="btn" data-a="pay" data-cc="${c.id}">${c.kind==="sup"?"+ "+t("paidS"):t("pay")}</button></div>
+  <h2>${t("ledger")}</h2><div class="card tw">${c.open?`<p style="margin:0 0 6px">Opening: ${inr(c.open)}</p>`:""}${rows.length?`<table><thead><tr><th>${t("date")}</th><th></th><th>±</th><th>${t("bal")}</th><th></th></tr></thead><tbody>${body}</tbody></table>`:`<div class="empty">${t("emptyT")}</div>`}</div>`;
+}
+function openDlg(h){dlg.innerHTML=h;dlg.showModal();const f=dlg.querySelector("input,select");f&&f.focus()}
+const btns=`<div class="acts" style="margin-top:14px"><button class="btn" value="ok">${"%s"}</button><button class="btn o" type="button" data-close>${"%c"}</button></div>`;
+function form(inner,id){return `<form id="${id}" novalidate>${inner}<p id="err" class="bad" role="alert" style="margin:8px 0 0"></p><div class="acts" style="margin-top:12px"><button class="btn">${t("save")}</button><button class="btn o" type="button" data-close>${t("cancel")}</button></div></form>`}
+const fld=(id,l,type="text",v="",x="")=>`<label for="${id}">${l}</label><input id="${id}" type="${type}" value="${esc(v)}" ${x}>`;
+function addC(kind="cust"){
+  openDlg(form(fld("fn",t("name"),"text","","autocomplete=off required")+fld("fp",t("phone"),"tel","","inputmode=tel")+fld("fo",t("open"),"number","","inputmode=decimal step=0.01 min=0")+fld("fnt",t("notes")),"fc"));
+  document.getElementById("fc").onsubmit=e=>{e.preventDefault();const n=fn.value.trim(),o=fo.value?toP(fo.value):0,er=document.getElementById("err");
+    if(!n){er.textContent=t("needName");return}if(isNaN(o)||o<0){er.textContent=t("needAmt");return}
+    if(S.c.some(c=>c.name.toLowerCase()===n.toLowerCase()||c.name.toLowerCase().includes(n.toLowerCase())||n.toLowerCase().includes(c.name.toLowerCase()))&&!confirm(t("dup")))return;
+    S.c.push({id:"C"+uid(),kind,name:n,phone:fp.value.trim(),open:o,notes:fnt.value.trim()});if(save()){dlg.close();render()}};
+}
+function txn(type,cc){
+  if(!S.c.length){toast(t("emptyC"));return}
+  const kk=(S.c.find(c=>c.id===(cc||cur))||{}).kind||"cust";const opts=S.c.filter(c=>c.kind===kk).map(c=>`<option value="${c.id}" ${c.id===(cc||cur)?"selected":""}>${esc(c.name)}</option>`).join("");
+  openDlg(form(`<label for="fcu">${t("sel")}</label><select id="fcu">${opts}</select>`+fld("fa",t("amt"),"number","","inputmode=decimal step=0.01 min=0.01")+fld("fd",t("date"),"date",today())+(type==="credit"?fld("fdu",t("due"),"date"):"")+fld("fnt",t("notes")),"ft"));
+  document.getElementById("ft").onsubmit=e=>{e.preventDefault();const a=toP(fa.value),er=document.getElementById("err");
+    if(isNaN(a)||a<=0||a>1e11){er.textContent=t("needAmt");return}
+    if(!fd.value){er.textContent=t("date");return}
+    if(type==="payment"&&S.t.some(x=>x.cid===fcu.value&&x.type==="payment"&&x.amt===a&&x.date===fd.value)&&!confirm(t("dupP")))return;
+    S.t.push({id:uid(),cid:fcu.value,type,amt:a,date:fd.value,due:type==="credit"?(document.getElementById("fdu").value||""):"",note:fnt.value.trim()});
+    if(save()){dlg.close();render()}};
+}
+function reverse(id){
+  const x=S.t.find(y=>y.id===id);if(!x||!confirm(t("revQ")))return;
+  S.t.push({id:uid(),cid:x.cid,type:sign[x.type]>0?"adj_down":"adj_up",amt:x.amt,date:today(),due:"",note:"Reversal of "+x.id,rev:x.id});save();render();
+}
+function csv(){
+  const e=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+  const lines=[["id","date","customer","type","amount_inr","note","reverses"].map(e).join(",")];
+  S.t.forEach(x=>{const c=S.c.find(c=>c.id===x.cid);lines.push([x.id,x.date,c?.name,x.type,(x.amt/100).toFixed(2),x.note,x.rev||""].map(e).join(","))});
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"}));a.download="hisab-transactions.csv";a.click();
+}
+const isC=id=>S.c.find(c=>c.id===id)?.kind!=="sup";
+const tl=x=>{const p=!isC(x.cid);return t(x.type==="payment"?(p?"paidS":"payTo"):x.type==="credit"?(p?"buy":"sale"):"revd")};
+const E=()=>document.getElementById("err");
+const sel=(id,l,arr)=>`<label for="${id}">${l}</label><select id="${id}">${arr.map(([v,k])=>`<option value="${v}">${k}</option>`).join("")}</select>`;
+const MT=()=>[["cash",t("cash")],["upi",t("upi")],["bank",t("bank")]];
+function saleDlg(){
+  const cs=S.c.filter(c=>c.kind!=="sup").map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+  openDlg(form(fld("si",t("desc"))+fld("sq","Qty","number","1","inputmode=decimal step=any min=0")+fld("sp",t("amt")+" / unit","number","","inputmode=decimal step=0.01 min=0")+fld("sdc","Discount (₹)","number","0","inputmode=decimal step=0.01 min=0")+sel("sm",t("method"),[...MT(),["credit",t("creditM")]])+`<label for="sc">${t("sel")}</label><select id="sc"><option value="">—</option>${cs}</select>`+fld("sdt",t("date"),"date",today()),"fs"));
+  document.getElementById("fs").onsubmit=e=>{e.preventDefault();
+    const qq=parseFloat(sq.value),p=toP(sp.value),dc=sdc.value?toP(sdc.value):0;
+    if(!(qq>0)||isNaN(p)||p<=0||isNaN(dc)||dc<0){E().textContent=t("needAmt");return}
+    const tot=Math.round(qq*p)-dc;if(tot<=0){E().textContent=t("needAmt");return}
+    if(sm.value==="credit"&&!sc.value){E().textContent=t("sel");return}
+    const id=uid();S.sa.push({id,date:sdt.value,item:si.value.trim(),qty:qq,price:p,disc:dc,amt:tot,method:sm.value,cid:sc.value});
+    if(sm.value==="credit")S.t.push({id:uid(),cid:sc.value,type:"credit",amt:tot,date:sdt.value,due:"",note:si.value.trim(),sale:id});
+    if(save()){dlg.close();render()}};
+}
+function expDlg(){
+  openDlg(form(sel("ec",t("cat"),["Rent","Electricity","Salaries","Transport","Packaging","Marketing","Maintenance","Other"].map(x=>[x,x]))+fld("ea",t("amt"),"number","","inputmode=decimal step=0.01 min=0.01")+fld("edt",t("date"),"date",today())+sel("em",t("method"),MT())+fld("ed",t("desc")),"fe"));
+  document.getElementById("fe").onsubmit=e=>{e.preventDefault();const a=toP(ea.value);
+    if(isNaN(a)||a<=0){E().textContent=t("needAmt");return}
+    S.ex.push({id:uid(),date:edt.value,cat:ec.value,amt:a,method:em.value,desc:ed.value.trim()});if(save()){dlg.close();render()}};
+}
+function money(){
+  const td=today(),ts=S.sa.filter(x=>x.date===td).reduce((a,x)=>a+x.amt,0),te=S.ex.filter(x=>x.date===td).reduce((a,x)=>a+x.amt,0);
+  const top=a=>[...a].sort((x,y)=>y.date.localeCompare(x.date)).slice(0,8);
+  return `<div class="acts"><button class="btn" data-a="sale">${t("addSale")}</button><button class="btn o" data-a="exp">${t("addExp")}</button></div>
+  <div class="grid"><div class="card"><small>${t("netS")} (${t("today")})</small><b>${inr(ts)}</b></div><div class="card"><small>${t("expT")} (${t("today")})</small><b>${inr(te)}</b></div></div>
+  <h2>${t("addSale").slice(2)}</h2>${S.sa.length?`<div class="rows">${top(S.sa).map(x=>`<div class="row" style="cursor:default"><span><span class="n">${esc(x.item||"—")}</span><br><span class="s">${esc(x.date)} · ${t(x.method==="credit"?"creditM":x.method)}${x.cid?" · "+esc(S.c.find(c=>c.id===x.cid)?.name):""}</span></span><span class="amt">${inr(x.amt)}</span></div>`).join("")}</div>`:`<div class="empty">${t("emptyT")}</div>`}
+  <h2>${t("addExp").slice(2)}</h2>${S.ex.length?`<div class="rows">${top(S.ex).map(x=>`<div class="row" style="cursor:default"><span><span class="n">${esc(x.cat)}</span><br><span class="s">${esc(x.date)} · ${t(x.method)} ${esc(x.desc)}</span></span><span class="amt">${inr(x.amt)}</span></div>`).join("")}</div>`:`<div class="empty">${t("emptyT")}</div>`}`;
+}
+let rmon=today().slice(0,7);
+function rep(){
+  const sa=S.sa.filter(x=>x.date.startsWith(rmon)),ex=S.ex.filter(x=>x.date.startsWith(rmon));
+  const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),gross=sum(sa,x=>Math.round(x.qty*x.price)),disc=sum(sa,x=>x.disc),net=sum(sa,x=>x.amt),exp=sum(ex,x=>x.amt),prof=net-exp;
+  const by={};ex.forEach(x=>by[x.cat]=(by[x.cat]||0)+x.amt);const mx=Math.max(1,...Object.values(by));
+  const bm={};sa.forEach(x=>bm[x.method]=(bm[x.method]||0)+x.amt);
+  const rc=S.c.filter(c=>c.kind!=="sup").reduce((a,c)=>a+Math.max(bal(c),0),0),pb=S.c.filter(c=>c.kind==="sup").reduce((a,c)=>a+Math.max(bal(c),0),0);
+  const bar=(k,v,m)=>`<div class="row" style="cursor:default;display:block"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><span class="amt">${inr(v)}</span></div><div style="height:6px;background:var(--line);border-radius:3px;margin-top:6px"><div style="height:6px;width:${Math.round(v/m*100)}%;background:var(--y);border-radius:3px"></div></div></div>`;
+  const has=sa.length||ex.length;
+  return `<label for="rm">${t("month")}</label><input id="rm" type="month" value="${rmon}">
+  ${has?`<div class="grid"><div class="card"><small>${t("gross")}</small><b>${inr(gross)}</b></div><div class="card"><small>${t("disc")}</small><b>${inr(disc)}</b></div><div class="card"><small>${t("netS")}</small><b>${inr(net)}</b></div><div class="card"><small>${t("expT")}</small><b>${inr(exp)}</b></div></div>
+  <div class="big"><small>${t("profit")}</small><b>${inr(prof)}</b><p>${t("profNote")}</p></div>
+  <h2>${t("method")}</h2><div class="rows">${Object.keys(bm).length?Object.entries(bm).map(([k,v])=>bar(t(k==="credit"?"creditM":k),v,Math.max(1,net))).join(""):""}</div>
+  <h2>${t("cat")}</h2><div class="rows">${Object.entries(by).map(([k,v])=>bar(k,v,mx)).join("")}</div>`:`<div class="empty" style="margin-top:12px">${t("emptyT")}</div>`}
+  <div class="grid"><div class="card"><small>${t("lena")}</small><b>${inr(rc)}</b></div><div class="card"><small>${t("dena")}</small><b>${inr(pb)}</b></div></div>`;
+}
+let vp=null,vtxt="",vmsg="";
+function voicePg(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  return `<label for="vtxt">${t("vhint")}</label><textarea id="vtxt" rows="3">${esc(vtxt)}</textarea><div class="acts" style="margin-top:10px">${SR?`<button class="btn" data-a="vmic">${t("speak")}</button>`:""}<button class="btn o" data-a="vgo">${t("parse")}</button></div>${SR?"":`<p class="note">${t("vnone")}</p>`}${vmsg?`<p class="bad" role="alert">${esc(vmsg)}</p>`:""}${vp?vform():""}`;
+}
+function vform(){
+  const k=vp.k,pk=k==="pay"?"sup":"cust",lab={recv:t("sale"),pay:t("buy"),got:t("payTo"),sale:t("addSale").slice(2),exp:t("addExp").slice(2)}[k];
+  const ps=(k==="sale"||k==="exp")?"":`<label for="vpp">${t("sel")}</label><select id="vpp"><option value="">—</option>${S.c.filter(c=>c.kind===pk).map(c=>`<option value="${c.id}" ${c.id===vp.pid?"selected":""}>${esc(c.name)}</option>`).join("")}</select>${vp.name&&!vp.pid?`<p class="note">“${esc(vp.name)}” — ${t("noParty")}</p>`:""}`;
+  return `<div class="card" style="margin-top:14px"><b>${lab}</b><p class="note" style="margin:4px 0">${t("vconf")}</p>${ps}${fld("va",t("amt"),"number",vp.amt/100,"inputmode=decimal step=0.01")}${fld("vd",t("date"),"date",today())}${k==="exp"?fld("vc",t("cat"),"text",vp.cat):""}<p id="err" class="bad" role="alert"></p><button class="btn" data-a="vsave">${t("save")}</button></div>`;
+}
+function vparse(tx){
+  const el=document.getElementById("vtxt");vtxt=tx!==undefined?tx:(el?el.value:vtxt);vp=null;vmsg="";
+  const l=vtxt.trim().toLowerCase(),m=l.match(/(\d[\d,]*(?:\.\d+)?)/),amt=m?toP(m[1].replace(/,/g,"")):NaN;
+  if(!l||isNaN(amt)||amt<=0){vmsg=t("vfail");render();return}
+  const nm=x=>x.replace(/[\d,.]+/g," ").replace(/\b(aaj|rupaye|rupay|rs|ka|ki|ke|ne|se|ko)\b/g," ").replace(/\s+/g," ").trim();
+  let k,name="",x;
+  if(x=l.match(/^(.+?)\s+ne\s+.*(wapas|diye|diya|kiye|kiya|mile|mila)/)){k="got";name=x[1]}
+  else if(x=l.match(/^(.+?)\s+se\s+.*(lene|lena|leni)/)){k="recv";name=x[1]}
+  else if(x=l.match(/^(.+?)\s+ko\s+.*(dene|dena|deni)/)){k="pay";name=x[1]}
+  else if(/sale|bikri|becha|bechi/.test(l))k="sale";
+  else if(/kharch|bill|rent|kiraya|bijli|electricity|salary|expense/.test(l))k="exp";
+  else{vmsg=t("vfail");render();return}
+  name=nm(name);const pk=k==="pay"?"sup":"cust";
+  const pid=name?(S.c.find(c=>c.kind===pk&&c.name.toLowerCase()===name)||{}).id:"";
+  const cat=/rent|kiraya/.test(l)?"Rent":/bijli|electricity/.test(l)?"Electricity":/salary/.test(l)?"Salaries":"Other";
+  vp={k,amt,name,pid:pid||"",cat};render();
+}
+function vmic(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast(t("vnone"));return}
+  const r=new SR();r.lang="hi-IN";r.onresult=e=>vparse(e.results[0][0].transcript);r.onerror=()=>{vmsg=t("vfail");render()};r.start();
+}
+function vsave(){
+  const k=vp.k,a=toP(document.getElementById("va").value),d=document.getElementById("vd").value,pe=document.getElementById("vpp"),pid=pe?pe.value:"";
+  if(isNaN(a)||a<=0){E().textContent=t("needAmt");return}if(!d){E().textContent=t("date");return}
+  if(k==="exp")S.ex.push({id:uid(),date:d,cat:(document.getElementById("vc").value||"Other").trim(),amt:a,method:"cash",desc:vtxt});
+  else if(k==="sale")S.sa.push({id:uid(),date:d,item:"",qty:1,price:a,disc:0,amt:a,method:"cash",cid:""});
+  else{if(!pid){E().textContent=t("noParty");return}
+    if(k==="got"&&S.t.some(x=>x.cid===pid&&x.type==="payment"&&x.amt===a&&x.date===d)&&!confirm(t("dupP")))return;
+    S.t.push({id:uid(),cid:pid,type:k==="got"?"payment":"credit",amt:a,date:d,due:"",note:"Voice: "+vtxt})}
+  if(save()){vp=null;vtxt="";vmsg="";render()}
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-v],[data-c],[data-a],[data-rev],[data-close]");if(!b)return;
+  if(b.dataset.close!==undefined){dlg.close();return}
+  if(b.dataset.v){view=b.dataset.v;cur=null;render();scrollTo(0,0)}
+  else if(b.dataset.c){cur=b.dataset.c;view="one";render();scrollTo(0,0)}
+  else if(b.dataset.rev)reverse(b.dataset.rev);
+  else if(b.dataset.a==="addC")addC();else if(b.dataset.a==="addS")addC("sup");else if(b.dataset.a==="sale")saleDlg();else if(b.dataset.a==="exp")expDlg();else if(b.dataset.a==="vgo")vparse();else if(b.dataset.a==="vmic")vmic();else if(b.dataset.a==="vsave")vsave();
+  else if(b.dataset.a==="udhar")txn("credit",b.dataset.cc);
+  else if(b.dataset.a==="pay")txn("payment",b.dataset.cc);
+  else if(b.dataset.a==="csv")csv();
+});
+document.addEventListener("input",e=>{if(e.target.id==="rm"&&e.target.value){rmon=e.target.value;render();return}if(e.target.id==="q"){q=e.target.value;const p=e.target.selectionStart;render();const i=document.getElementById("q");i.focus();i.setSelectionRange(p,p)}});
+langB.onclick=()=>{lang=lang==="hi"?"en":"hi";try{localStorage.setItem(KEY+"l",lang)}catch(e){}render()};
+document.getElementById("thm").onclick=()=>{const d=document.documentElement,dk=d.dataset.theme?d.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;d.dataset.theme=dk?"light":"dark"};
+render();
+</script>
+</body>
+</html>
